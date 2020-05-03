@@ -1,10 +1,21 @@
 def nyc_pigeon_organizer(data)
-  new_hash = {:name =>{:color =>[], :gender =>[], :lives => [],}}
-  data.find_all do |memo, (key, value)|
-  value == "Theo" || "Peter Jr" || "Lucky" || "Ms K" || "Queenie" || "Alex" || "Andrew"
-  new_hash[:name] << value
+  new_hash = {}
+  data.each do |color_gender_lives, value|
+    value.each do |stats, all_names|
+      all_names.each do |name|
+        if new_hash[name] == nil 
+          new_hash[name] = {}
+        end
+        if new_hash[name][color_gender_lives] == nil
+          new_hash[name][color_gender_lives] = {}
+        end
+        new_hash[name][color_gender_lives].push(stats.to_s)
+      end
     end
+  end
+  new_hash
 end
+ 
 
 
 
@@ -16,6 +27,6 @@ end
 
 
 
-
+#{:name =>{:color =>[], :gender =>[], :lives => [],}}
  # value == "Theo" || "Peter Jr" || "Lucky" || "Ms K" || "Queenie" || "Alex" || "Andrew"
       #value >> :name
